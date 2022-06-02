@@ -5,6 +5,7 @@ class LikeButton extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {change: 0}
         this.toggleLike = this.toggleLike.bind(this);
         this.like = this.like.bind(this);
         this.unlike = this.unlike.bind(this);
@@ -23,7 +24,18 @@ class LikeButton extends React.Component {
     like() {
         console.log('code to like the post');
         // issue fetch request and then afterwards requery for the post:
-        // this.props.requeryPost();
+        fetch(`/api/posts/likes/`, {
+            method: "POST",
+            headers: getHeaders(),
+            body: JSON.stringify({"post_id" : this.props.postId})
+        })
+        .then(response => response.json())
+        .then(data => {
+
+        })
+        this.forceUpdate()
+        this.props.requeryPost();
+        this.render();
     }
 
     unlike() {
