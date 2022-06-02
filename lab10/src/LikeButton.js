@@ -31,17 +31,24 @@ class LikeButton extends React.Component {
         })
         .then(response => response.json())
         .then(data => {
-
         })
-        this.forceUpdate()
+        // this.forceUpdate()
         this.props.requeryPost();
-        this.render();
+        // this.render();
     }
 
     unlike() {
         console.log('code to unlike the post');
+        fetch(`/api/posts/likes/${this.props.likeId}`, {
+            method: "DELETE",
+            headers: getHeaders()
+        })
+        .then(response => response.json())
+        .then(data => {
+
+        })
         // issue fetch request and then afterwards requery for the post:
-        // this.props.requeryPost();
+        this.props.requeryPost();
     }
 
     render () {
